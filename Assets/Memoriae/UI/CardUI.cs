@@ -1,15 +1,22 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace Memoriae
 {
-    public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class CardUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
         private Vector3 _originalPos;
         private Quaternion _originalRotation;
+
+        private Vector3 _originalHandPos;
+        private Quaternion _originalHandRotation;
+
         private CanvasGroup _canvasGroup;
         private Transform _originalParent;
+
+        private GameObject hoveredCommandBlock;
+
+        private bool isFirstDrag_Flag = true;
 
         private void Awake()
         {
@@ -21,6 +28,14 @@ namespace Memoriae
         {
             _originalPos = transform.position;
             _originalRotation = transform.rotation;
+
+            if (isFirstDrag_Flag)
+            {
+                _originalHandPos = transform.position;
+                _originalHandRotation = transform.rotation; 
+                isFirstDrag_Flag = false;
+            }
+
             transform.rotation = Quaternion.Euler(0, 0, 0); // 拖動時重置旋轉
 
             _originalParent = transform.parent;
@@ -38,24 +53,35 @@ namespace Memoriae
             _canvasGroup.blocksRaycasts = true;
 
             // 偵測滑鼠下方是否有 CommandBlock
-            GameObject hovered = eventData.pointerCurrentRaycast.gameObject;
-            if (hovered != null && hovered.TryGetComponent<CommandBlock>(out var block))
+            hoveredCommandBlock = eventData.pointerCurrentRaycast.gameObject;
+            if (hoveredCommandBlock != null && hoveredCommandBlock.TryGetComponent<CommandBlock>(out var block))
             {
                 block.SetCard(this);
             }
             else
             {
-                transform.position = _originalPos; // 回到原位
-                transform.rotation = _originalRotation;
+                transform.SetPositionAndRotation(_originalPos, _originalRotation);
             }
         }
         #endregion
 
+        #region IPointerClickHandler Implementation
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (hoveredCommandBlock != null && eventData.button == PointerEventData.InputButton.Left)
+            {
+                hoveredCommandBlock.GetComponent<CommandBlock>().Clear();
+                ReturnToHand();
+            }
+        }
+
         public void ReturnToHand()
         {
+            transform.SetPositionAndRotation(_originalHandPos, _originalHandRotation);
             transform.SetParent(_originalParent);
-            transform.position = _originalPos;
-            // 確保回到手牌層級後，重新計算扇形排列（可視需求呼叫 HandUI）
         }
+
+        #endregion
     }
 }
