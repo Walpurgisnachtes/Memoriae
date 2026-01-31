@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Memoriae
 {
-    public class CommandBlock : MonoBehaviour, IPointerClickHandler
+    public class CommandBlock : MonoBehaviour
     {
         public CardUI OccupyingCard { get; private set; }
 
@@ -18,20 +18,7 @@ namespace Memoriae
 
         public void Clear()
         {
-            if (OccupyingCard != null)
-            {
-                OccupyingCard.ReturnToHand();
-                OccupyingCard = null;
-            }
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            // 檢查是否為左鍵點擊且目前有放置卡片
-            if (eventData.button == PointerEventData.InputButton.Left)
-            {
-                Clear();
-            }
+            OccupyingCard = null;
         }
     }
 }
