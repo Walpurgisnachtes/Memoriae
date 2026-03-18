@@ -18,7 +18,7 @@ namespace Memoriae.Tests
             Vector2Int center = new Vector2Int(3, 3);
 
             // Act
-            display.InitializeMap(size, size);
+            display.InitializeMap(size, size, out _);
             GameObject pieceObj = display.SpawnPieceAt(new Piece("Hero"), center);
 
             yield return null; // µ¥«Ý¤@´V´è¬V
