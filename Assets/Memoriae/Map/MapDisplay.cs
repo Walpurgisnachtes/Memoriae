@@ -9,9 +9,10 @@ namespace Memoriae
 
         private GameMap _map;
 
-        public void InitializeMap(int width, int height)
+        public void InitializeMap(int width, int height, out GameMap map)
         {
             _map = new GameMap(width, height);
+            map = _map; // 賦值給 out 參數
 
             // 生成 Tile 視覺效果
             for (int x = 0; x < width; x++)
