@@ -14,7 +14,7 @@ namespace Memoriae
         private CanvasGroup _canvasGroup;
         private Transform _originalParent;
 
-        private GameObject hoveredCommandBlock;
+        private GameObject settedCommandBlock;
 
         private bool isFirstDrag_Flag = true;
 
@@ -26,6 +26,10 @@ namespace Memoriae
         #region IDragHandler Implementation
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (settedCommandBlock == null)
+            {
+                settedCommandBlock = eventData.pointerCurrentRaycast.gameObject;
+            }
             _originalPos = transform.position;
             _originalRotation = transform.rotation;
 
@@ -53,15 +57,25 @@ namespace Memoriae
             _canvasGroup.blocksRaycasts = true;
 
             // 偵測滑鼠下方是否有 CommandBlock
-            hoveredCommandBlock = eventData.pointerCurrentRaycast.gameObject;
-            if (hoveredCommandBlock != null && hoveredCommandBlock.TryGetComponent<CommandBlock>(out var block))
+            GameObject hoveredCommandBlock = eventData.pointerCurrentRaycast.gameObject;
+            if (hoveredCommandBlock != null)
             {
-                block.SetCard(this);
+                if (hoveredCommandBlock.TryGetComponent<CommandBlock>(out var block))
+                {
+                    settedCommandBlock = hoveredCommandBlock;
+                    block.SetCard(this);
+
+                }
+                else if (hoveredCommandBlock.TryGetComponent<CardUI>(out var card))
+                {
+                    SwapCards(card);
+                }
             }
             else
             {
                 transform.SetPositionAndRotation(_originalPos, _originalRotation);
             }
+                
         }
         #endregion
 
@@ -69,9 +83,9 @@ namespace Memoriae
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if (hoveredCommandBlock != null && eventData.button == PointerEventData.InputButton.Left)
+            if (eventData.button == PointerEventData.InputButton.Left)
             {
-                hoveredCommandBlock.GetComponent<CommandBlock>().Clear();
+                settedCommandBlock.GetComponent<CommandBlock>().Clear();
                 ReturnToHand();
             }
         }
@@ -80,6 +94,34 @@ namespace Memoriae
         {
             transform.SetPositionAndRotation(_originalHandPos, _originalHandRotation);
             transform.SetParent(_originalParent);
+        }
+
+        #endregion
+
+        #region Card Swap
+
+        /// <summary>
+        /// 交換卡片位置：將目前卡片移到目標 CommandBlock，原本的卡片移回此卡片的原始 CommandBlock
+        /// </summary>
+        private void SwapCards(CardUI targetCard)
+        {
+            targetCard.settedCommandBlock.TryGetComponent(out CommandBlock occupiedCommandBlock);
+            
+            // 將佔據目標區塊的卡片移到原始區塊
+            if (settedCommandBlock.TryGetComponent(out CommandBlock originalCommandBlock))
+            {
+                originalCommandBlock.SetCard(targetCard);
+                targetCard.settedCommandBlock = settedCommandBlock;
+            }
+            else
+            {
+                // 若原始位置不是 CommandBlock，將卡片退回
+                targetCard.ReturnToHand();
+            }
+
+            // 將拖動的卡片移到目標區塊
+            settedCommandBlock = occupiedCommandBlock.gameObject;
+            occupiedCommandBlock.SetCard(this);
         }
 
         #endregion
