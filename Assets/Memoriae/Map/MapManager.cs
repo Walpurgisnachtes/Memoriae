@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Memoriae
 {
+    [RequireComponent(typeof(MapDisplay))]
     public class MapManager : MonoBehaviour
     {
         public int width = 7;
@@ -19,12 +20,12 @@ namespace Memoriae
                 display.InitializeMap(width, height);
 
                 // 在中心點放置 Piece
-                Vector2Int center = new Vector2Int(width / 2, height / 2);
-                display.SpawnPieceAt(new Piece("Hero"), center);
+                Vector2Int center = new(width / 2, height / 2);
+                display.SpawnPieceAt(new("Friend"), new(1, 3));
+                display.SpawnPieceAt(new("Enemy"), new(9, 3));
             }
 
-            CameraController camCtrl = Camera.main.GetComponent<CameraController>();
-            if (camCtrl != null)
+            if (Camera.main.TryGetComponent<CameraController>(out var camCtrl))
             {
                 camCtrl.Setup(width, height);
             }
