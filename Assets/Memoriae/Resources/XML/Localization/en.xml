@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <LocalizedText>
+    <!-- Card Text -->
+    <Replace Tag="LOC_CARD_100001_NAME" Language="en">
+      <Text>Eight Corners</Text>
+    </Replace>
+    <Replace Tag="LOC_CARD_100001_TARGET_DESC" Language="en">
+      <Text>Target 1 enemy within range 4."</Text>
+    </Replace>
+    <Replace Tag="LOC_CARD_100001_EFFECT_DESC" Language="en">
+      <Text>Deal 100% damage to target. Deal 10% damage to self.</Text>
+    </Replace>
+  </LocalizedText>
+</GameData>

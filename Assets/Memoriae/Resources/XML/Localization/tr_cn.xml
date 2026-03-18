@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GameData>
+  <LocalizedText>
+    <!-- Card Text -->
+    <Replace Tag="LOC_CARD_100001_NAME" Language="tr_cn">
+      <Text>八紘一宇</Text>
+    </Replace>
+    <Replace Tag="LOC_CARD_100001_TARGET_DESC" Language="tr_cn">
+      <Text>選擇一個範圍4以內的敵方單位為目標。</Text>
+    </Replace>
+    <Replace Tag="LOC_CARD_100001_EFFECT_DESC" Language="tr_cn">
+      <Text>對目標造成100%傷害。對自己造成10%傷害。</Text>
+    </Replace>
+  </LocalizedText>
+</GameData>
