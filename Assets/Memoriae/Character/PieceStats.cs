@@ -28,7 +28,7 @@ namespace Memoriae
         public int DamageReduction;
 
         // 初始化構造函數
-        public PieceStats(int atk = 0, int def = 0, int hp = 10, int prt = 0, int phym = 0, int sptm = 0, int dmg_rdt = 0)
+        public PieceStats(int atk = 10, int def = 0, int hp = 100, int prt = 0, int phym = 0, int sptm = 0, int dmg_rdt = 0)
         {
             Attack = atk;
             Defense = def;
