@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Memoriae
@@ -30,6 +31,18 @@ namespace Memoriae
 
             // 確保傷害不小於 1
             return Mathf.Max(1, Mathf.RoundToInt(finalDamage));
+        }
+
+        public static int CalculateFromVariables(Dictionary<string, int> sourceVariables, Dictionary<string, int> targetVariables, float efficiency, bool isSpiritual)
+        {
+            return Calculate(
+                attack: sourceVariables["Attack"],
+                efficiency: efficiency,
+                enemyDef: targetVariables["Defense"],
+                penetration: sourceVariables["Penetration"],
+                enemyReduc: targetVariables["DamageReduction"],
+                isSpiritual: isSpiritual
+            );
         }
     }
 }
