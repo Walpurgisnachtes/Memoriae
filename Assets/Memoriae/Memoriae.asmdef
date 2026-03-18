@@ -1,3 +1,16 @@
 {
-	"name": "Memoriae"
+    "name": "Memoriae",
+    "rootNamespace": "",
+    "references": [
+        "GUID:cbef9903b30bcce4dbd60e9907c0dd5d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
