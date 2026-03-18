@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: UI
+    uniqueID: 2893560543
+    locked: 0
+  - name: OnTile
+    uniqueID: 1693562895
+    locked: 0
+  - name: Tile
+    uniqueID: 839101619
+    locked: 0
+  - name: BelowTile
+    uniqueID: 305928073
+    locked: 0
