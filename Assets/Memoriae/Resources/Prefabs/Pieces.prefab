@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632617748309412952}
   - component: {fileID: 6513266180111405179}
+  - component: {fileID: 1496194000871879569}
   - component: {fileID: 6665154318948453078}
   m_Layer: 0
   m_Name: Pieces
@@ -254,6 +255,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1496194000871879569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4621679952915138015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1784b99265e396d4aa704564754607f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hpBarImageComp: {fileID: 7415726842937800449}
+  _hpBarAnimationDuration: 0.5
+  _hpBarEase: 6
 --- !u!114 &6665154318948453078
 MonoBehaviour:
   m_ObjectHideFlags: 0
