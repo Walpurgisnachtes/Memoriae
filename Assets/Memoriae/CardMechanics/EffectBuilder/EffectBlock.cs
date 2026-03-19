@@ -38,11 +38,4 @@ namespace Memoriae
             return PotentialActions.Any(a => a.GameActionType == action);
         }
     }
-
-    public interface ICondition
-    {
-        // 傳入當前的戰場快照或遊戲狀態進行判定
-        bool IsSatisfied(GameContext context);
-    }
-    
 }
