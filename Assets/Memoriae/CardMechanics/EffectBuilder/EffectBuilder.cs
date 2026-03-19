@@ -5,8 +5,8 @@ namespace Memoriae
 {
     public class EffectBuilder
     {
-        private EffectBlock _block = new();
-        private AbstractCard _sourceCard;
+        private readonly EffectBlock _block = new();
+        private readonly AbstractCard _sourceCard;
         private EffectBuilder(AbstractCard card)
         {
             _sourceCard = card;
