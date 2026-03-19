@@ -31,7 +31,7 @@ namespace Memoriae
                     {
                         // 嘗試創建卡牌實例（需要無參數構造器）
                         var cardInstance = (AbstractCard)Activator.CreateInstance(cardType);
-                        _cardDatabase[cardInstance.Id] = cardInstance;
+                        _cardDatabase[cardInstance.Id.ToString()] = cardInstance;
                     }
                     catch (Exception ex)
                     {
