@@ -41,7 +41,7 @@ namespace Memoriae
                     AtomicGameActionType.CharacterStatusEffectModificationAction => new CharacterStatusEffectModificationAction(parameters),
                     AtomicGameActionType.TileStatusEffectModificationAction => new TileStatusEffectModificationAction(parameters),
                     AtomicGameActionType.PlayerStatusEffectModificationAction => new PlayerStatusEffectModificationAction(parameters),
-                    AtomicGameActionType.RoundStatusModificationAction => new RoundStatusModiicationAction(parameters),
+                    AtomicGameActionType.RoundStatusModificationAction => new RoundStatusModificationAction(parameters),
                     _ => throw new ArgumentException($"Actionem ludicam ignotam accepi: {actionType}", nameof(actionType))
                 };
             }
@@ -78,5 +78,7 @@ namespace Memoriae
         // 所有GameAction都必須有一張AbstractCard類型作為Source，表示這個GameAction是由哪張牌觸發的
         public AbstractCard SourceCard { get; protected set; }
         public int Amount { get; protected set; }
+        public Guid Guid { get; private set; } = Guid.NewGuid();
+        public abstract Dictionary<string, object> GetParameters();
     }
 }
