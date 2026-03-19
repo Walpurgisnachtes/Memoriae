@@ -28,7 +28,7 @@ namespace Memoriae
             }
     
             GameObject pieceObj = display.SpawnPieceAt(piece, pos);
-            AddPiece(piece.Name, pieceObj);
+            AddPieceToMap(piece.Name, pieceObj);
             if (pieceObj.TryGetComponent<PieceManager>(out var pieceManager))
             {
                 pieceManager.BindPiece(piece);
@@ -63,7 +63,7 @@ namespace Memoriae
         /// <summary>
         /// 獲取指定 ID 的 Piece 物件
         /// </summary>
-        public static GameObject GetPiece(string pieceId)
+        public static GameObject GetPieceOnMap(string pieceId)
         {
             if (string.IsNullOrEmpty(pieceId))
             {
@@ -83,7 +83,7 @@ namespace Memoriae
         /// <summary>
         /// 添加或更新 Piece 物件至字典
         /// </summary>
-        public static void AddPiece(string pieceId, GameObject pieceObj)
+        public static void AddPieceToMap(string pieceId, GameObject pieceObj)
         {
             if (string.IsNullOrEmpty(pieceId) || pieceObj == null)
             {
@@ -106,7 +106,7 @@ namespace Memoriae
         /// <summary>
         /// 移除指定 ID 的 Piece 物件
         /// </summary>
-        public static bool RemovePiece(string pieceId)
+        public static bool RemovePieceOnMap(string pieceId)
         {
             if (string.IsNullOrEmpty(pieceId))
             {
@@ -127,7 +127,7 @@ namespace Memoriae
         /// <summary>
         /// 檢查是否存在指定 ID 的 Piece 物件
         /// </summary>
-        public static bool ContainsPiece(string pieceId)
+        public static bool MapContainsPiece(string pieceId)
         {
             return !string.IsNullOrEmpty(pieceId) && _pieceObjects.ContainsKey(pieceId);
         }
@@ -135,7 +135,7 @@ namespace Memoriae
         /// <summary>
         /// 獲取所有 Piece 物件
         /// </summary>
-        public static IReadOnlyDictionary<string, GameObject> GetAllPieces()
+        public static IReadOnlyDictionary<string, GameObject> GetAllPiecesOnMap()
         {
             return _pieceObjects;
         }
@@ -143,7 +143,7 @@ namespace Memoriae
         /// <summary>
         /// 獲取所有 Piece 物件的數量
         /// </summary>
-        public static int GetPieceCount()
+        public static int GetPieceCountOnMap()
         {
             return _pieceObjects.Count;
         }
@@ -151,7 +151,7 @@ namespace Memoriae
         /// <summary>
         /// 清空所有 Piece 物件
         /// </summary>
-        public static void ClearAllPieces()
+        public static void ClearAllPiecesOnMap()
         {
             int count = _pieceObjects.Count;
             _pieceObjects.Clear();
@@ -161,7 +161,7 @@ namespace Memoriae
         /// <summary>
         /// 檢查是否存在任何 Piece 物件
         /// </summary>
-        public static bool HasAnyPieces()
+        public static bool MapHasAnyPieces()
         {
             return _pieceObjects.Count > 0;
         }
