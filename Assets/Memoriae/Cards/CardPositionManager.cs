@@ -25,6 +25,10 @@ namespace Memoriae
 
         public List<AbstractCard> GetCardsInPosition(CardPositionType position)
         {
+            if (position == CardPositionType.Battlefield)
+            {
+                return new List<AbstractCard>(BattlefieldCards.Values);
+            }
             return position switch
             {
                 CardPositionType.Hand => HandCards,
